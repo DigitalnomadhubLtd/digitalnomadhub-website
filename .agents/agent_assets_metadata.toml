@@ -1,0 +1,26 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "9-Kj-S1R8SglozGZwEeNI"
+uri = "file://artifacts/digital-nomad-hub/public/images/hero-bg.png"
+type = "image"
+title = "Abstract deep blue tech background"
+
+[[generated]]
+id = "9iLW7uAFWaSOYhQwZgsqu"
+uri = "file://artifacts/digital-nomad-hub/public/images/founder-os.png"
+type = "image"
+title = "Founder operating system dashboard"
+
+[[generated]]
+id = "V-WlGBEr23BCPpXHLWHNF"
+uri = "file://artifacts/digital-nomad-hub/public/images/global-network.png"
+type = "image"
+title = "Abstract global network connection"
+
+[[generated]]
+id = "GHyRAnivLjz4DzTmiAuC8"
+uri = "file://artifacts/digital-nomad-hub/public/images/automation.png"
+type = "image"
+title = "AI automation abstract concept"
