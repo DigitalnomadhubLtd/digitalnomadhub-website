@@ -79,12 +79,16 @@ router.post("/consultation", async (req, res): Promise<void> => {
 </html>
   `.trim();
 
+  // Use Resend's shared sender until digitalnomadhub.online domain is verified at resend.com/domains.
+  // Once DNS records are verified, update FROM to: Digital Nomad Hub <hello@digitalnomadhub.online>
+  const verifiedFrom = process.env.RESEND_VERIFIED_FROM ?? "Digital Nomad Hub <onboarding@resend.dev>";
+
   try {
     const connectors = new ReplitConnectors();
     const response = await connectors.proxy("resend", "/emails", {
       method: "POST",
       body: JSON.stringify({
-        from: "Digital Nomad Hub <onboarding@resend.dev>",
+        from: verifiedFrom,
         to: ["hello@digitalnomadhub.online"],
         reply_to: email,
         subject: `New Consultation: ${name}${company ? ` — ${company}` : ""}`,
@@ -92,14 +96,18 @@ router.post("/consultation", async (req, res): Promise<void> => {
       }),
     });
 
+    const responseText = await response.text();
+
     if (!response.ok) {
-      const errBody = await response.text();
-      req.log.error({ status: response.status, body: errBody }, "Resend API error");
-      res.status(502).json({ error: "Failed to send email. Please try again." });
+      req.log.error(
+        { status: response.status, resendResponse: responseText },
+        "Resend API rejected the request"
+      );
+      res.status(502).json({ error: "Failed to send email. Please try again or contact us directly at hello@digitalnomadhub.online." });
       return;
     }
 
-    req.log.info({ name, email }, "Consultation request sent");
+    req.log.info({ name, email, resendResponse: responseText }, "Consultation email sent successfully");
     res.status(200).json({ success: true });
   } catch (err) {
     logger.error({ err }, "Unexpected error sending consultation email");
