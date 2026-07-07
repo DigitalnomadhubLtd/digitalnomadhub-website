@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import ConsultationModal from "@/components/ConsultationModal";
 import { 
   ArrowRight, 
   Globe2, 
@@ -42,6 +43,7 @@ export default function Home() {
   const { toast } = useToast();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [consultationOpen, setConsultationOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,6 +73,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/30">
+      <ConsultationModal open={consultationOpen} onClose={() => setConsultationOpen(false)} />
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "glass-nav py-4" : "bg-transparent py-6"}`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
@@ -84,9 +87,12 @@ export default function Home() {
             <a href="#process" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Process</a>
             <a href="#why-us" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Why Us</a>
             <a href="#faq" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
-            <a href="#contact" className="px-5 py-2.5 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground rounded-full text-sm font-medium transition-all">
+            <button
+              onClick={() => setConsultationOpen(true)}
+              className="px-5 py-2.5 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground rounded-full text-sm font-medium transition-all"
+            >
               Initialize Project
-            </a>
+            </button>
           </div>
 
           <button className="md:hidden p-2 text-foreground" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -104,9 +110,9 @@ export default function Home() {
             <a href="#process" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">Process</a>
             <a href="#why-us" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">Why Us</a>
             <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">FAQ</a>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="mt-4 px-6 py-4 bg-primary text-primary-foreground rounded-full text-center font-medium">
+            <button onClick={() => { setMobileMenuOpen(false); setConsultationOpen(true); }} className="mt-4 px-6 py-4 bg-primary text-primary-foreground rounded-full text-center font-medium">
               Initialize Project
-            </a>
+            </button>
           </div>
         </div>
       )}
@@ -134,10 +140,13 @@ export default function Home() {
               We engineer scalable internet businesses using AI, automation, and premium software infrastructure. Build from anywhere. Scale everywhere.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-              <a href="#contact" className="w-full sm:w-auto px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
+              <button
+                onClick={() => setConsultationOpen(true)}
+                className="w-full sm:w-auto px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
+              >
                 Deploy Your Business
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
               <a href="#services" className="w-full sm:w-auto px-8 py-4 bg-secondary/50 text-foreground border border-border rounded-full font-medium hover:bg-secondary transition-all flex items-center justify-center">
                 Explore Capabilities
               </a>
@@ -324,10 +333,10 @@ export default function Home() {
              <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
                We believe geography should not dictate destiny. By leveraging code and automation, we help founders build systems that generate wealth regardless of their physical coordinates.
              </p>
-             <a href="#contact" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-all shadow-[0_0_30px_rgba(var(--primary),0.3)]">
+             <button onClick={() => setConsultationOpen(true)} className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-all shadow-[0_0_30px_rgba(var(--primary),0.3)]">
                 Start Building Today
                 <Zap className="w-4 h-4" />
-              </a>
+              </button>
           </div>
         </div>
       </section>
