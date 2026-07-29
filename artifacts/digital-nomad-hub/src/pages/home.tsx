@@ -36,8 +36,8 @@ const Logo = ({ variant = "nav" }: { variant?: "nav" | "footer" }) => {
       <img
         src="/images/logo-full.png"
         alt="Digital Nomad Hub Ltd."
-        className="h-20 w-auto object-contain"
-        style={{ filter: "drop-shadow(0 0 12px rgba(59,130,246,0.4))" }}
+        className="h-28 w-auto object-contain"
+        style={{ mixBlendMode: "screen", filter: "drop-shadow(0 0 20px rgba(59,130,246,0.6))" }}
       />
     );
   }
@@ -46,9 +46,10 @@ const Logo = ({ variant = "nav" }: { variant?: "nav" | "footer" }) => {
       <img
         src="/images/logo-badge.png"
         alt="Digital Nomad Hub"
-        className="h-9 w-9 object-contain transition-transform duration-500 group-hover:scale-110"
+        className="h-11 w-11 object-contain transition-transform duration-500 group-hover:scale-110"
+        style={{ mixBlendMode: "screen" }}
       />
-      <span className="font-bold text-lg tracking-tight hidden sm:inline-block">
+      <span className="font-bold text-lg tracking-tight hidden sm:inline-block text-white">
         Digital Nomad Hub
       </span>
     </div>
