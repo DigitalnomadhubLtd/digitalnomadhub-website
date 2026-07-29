@@ -30,14 +30,30 @@ import { Textarea } from "@/components/ui/textarea";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from "@/hooks/use-toast";
 
-const Logo = () => (
-  <div className="flex items-center gap-2">
-    <div className="w-8 h-8 bg-primary rounded-[8px] flex items-center justify-center rotate-45 transform transition-transform group-hover:rotate-90 duration-500">
-      <div className="w-4 h-4 border-2 border-primary-foreground rounded-sm -rotate-45" />
+const Logo = ({ variant = "nav" }: { variant?: "nav" | "footer" }) => {
+  if (variant === "footer") {
+    return (
+      <img
+        src="/images/logo-full.png"
+        alt="Digital Nomad Hub Ltd."
+        className="h-20 w-auto object-contain"
+        style={{ filter: "drop-shadow(0 0 12px rgba(59,130,246,0.4))" }}
+      />
+    );
+  }
+  return (
+    <div className="flex items-center gap-3">
+      <img
+        src="/images/logo-badge.png"
+        alt="Digital Nomad Hub"
+        className="h-9 w-9 object-contain transition-transform duration-500 group-hover:scale-110"
+      />
+      <span className="font-bold text-lg tracking-tight hidden sm:inline-block">
+        Digital Nomad Hub
+      </span>
     </div>
-    <span className="font-bold text-xl tracking-tight hidden sm:inline-block">DNH.</span>
-  </div>
-);
+  );
+};
 
 export default function Home() {
   const { toast } = useToast();
@@ -494,7 +510,7 @@ export default function Home() {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div className="md:col-span-2 space-y-6">
-              <Logo />
+              <Logo variant="footer" />
               <p className="text-muted-foreground max-w-sm">
                 Engineering digital autonomy. We build the technological infrastructure that enables founders to operate highly profitable businesses from anywhere on Earth.
               </p>
