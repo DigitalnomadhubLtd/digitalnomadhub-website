@@ -122,7 +122,11 @@ export default function ConsultationModal({ open, onClose }: Props) {
     setSubmitting(true);
     setServerError("");
     try {
-      const res = await fetch("/api/consultation", {
+      // VITE_API_URL is set at build time for deployments where the API lives on
+      // a different origin (e.g. Vercel frontend → Replit API server).
+      // Falls back to "" (same-origin) when running on Replit.
+      const apiBase = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
+      const res = await fetch(`${apiBase}/api/consultation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
