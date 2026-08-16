@@ -1,6 +1,13 @@
 {
   "rewrites": [
-    { "source": "/((?!images|assets|favicon\\.svg|robots\\.txt|opengraph\\.jpg).*)", "destination": "/index.html" }
+    {
+      "source": "/api/:path*",
+      "destination": "https://nomad-hq.replit.app/api/:path*"
+    },
+    {
+      "source": "/((?!images|assets|favicon\\.svg|robots\\.txt|opengraph\\.jpg).*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
